@@ -8,16 +8,37 @@ try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "INSERT INTO MyGuests (firstname, lastname, email)
-    VALUES ('John', 'Doe', 'john@example.com')";
-    // use exec() because no results are returned
-    $conn->exec($sql);
-    echo "New record created successfully";
+
+    // prepare sql and bind parameters
+    $stmt = $conn->prepare("INSERT INTO MyGuests (firstname, lastname, email)
+    VALUES (:firstname, :lastname, :email)");
+    $stmt->bindParam(':firstname', $firstname);
+    $stmt->bindParam(':lastname', $lastname);
+    $stmt->bindParam(':email', $email);
+
+    // insert a row
+    $firstname = "John";
+    $lastname = "Doe";
+    $email = "john@example.com";
+    $stmt->execute();
+
+    // insert another row
+    $firstname = "Mary";
+    $lastname = "Moe";
+    $email = "mary@example.com";
+    $stmt->execute();
+
+    // insert another row
+    $firstname = "Julie";
+    $lastname = "Dooley";
+    $email = "julie@example.com";
+    $stmt->execute();
+
+    echo "New records created successfully";
     }
 catch(PDOException $e)
     {
-    echo $sql . "<br>" . $e->getMessage();
+    echo "Error: " . $e->getMessage();
     }
-
 $conn = null;
 ?> 
