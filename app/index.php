@@ -18,23 +18,11 @@ try {
 
     // insert a row
     $firstname = "John";
-    $lastname = "Doe";
-    $email = "john@example.com";
+    $lastname = "Deo";
+    $email = "oksel@example.com";
     $stmt->execute();
 
-    // insert another row
-    $firstname = "Mary";
-    $lastname = "Moe";
-    $email = "mary@example.com";
-    $stmt->execute();
-
-    // insert another row
-    $firstname = "Julie";
-    $lastname = "Dooley";
-    $email = "julie@example.com";
-    $stmt->execute();
-
-    echo "New records created successfully";
+    echo "New records oksel created successfully";
     }
 catch(PDOException $e)
     {
