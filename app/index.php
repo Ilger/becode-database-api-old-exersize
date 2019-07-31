@@ -11,17 +11,21 @@ try {
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // sql to delete a record
-    $sql = "DELETE FROM MyGuests WHERE id=3";
+    $sql = "UPDATE MyGuests SET lastname='Doe' WHERE id=2";
 
-    // use exec() because no results are returned
-    $conn->exec($sql);
-    echo "Record deleted successfully";
+    // Prepare statement
+    $stmt = $conn->prepare($sql);
+
+    // execute the query
+    $stmt->execute();
+
+    // echo a message to say the UPDATE succeeded
+    echo $stmt->rowCount() . " records UPDATED successfully";
     }
 catch(PDOException $e)
     {
     echo $sql . "<br>" . $e->getMessage();
     }
 
-$conn = null
+$conn = null;
 ?> 
